@@ -2,9 +2,9 @@
 .label @Prep_Text_load_WORLD, 0x800e6edc
 .label @Status_Flag_Check, 0x8018e9bc
 
-										.org 0x80059854
-										@Initialize_Status_Check_Data:  #ISCD  #code
-0x00059854:                                      addiu r29,r29,0xffe8					  #
+					.org 0x80059854
+					@Initialize_Status_Check_Data:  #ISCD  #code
+0x00059854:                                      addiu r29,r29,0xffe8                                         #
                                                  sw r31,0x0010(r29)					      #
                                                  lui r4,0x8006						      #
                                                  addiu r4,r4,0x9414					      #r4 = Pointer to ?
@@ -22,7 +22,7 @@
                                                  lui r1,0x8006						      #
                                                  addu r1,r1,r8						      #
                                                  lbu r6,0x5de9(r1)					      #Load Status Effects Byte 5
-                                                 bgez r7, @ISCD.skip			          #Branch if Current Status >= 0
+                                                 bgez r7, @ISCD.skip                                          #Branch if Current Status >= 0
                                                  addu r2,r7,r0						      #r2 = Current Status
                                                  addiu r2,r7,0x0007					      #r2 = Current Status + 7 (random  negative crap)
 @ISCD.skip:                                      sra r4,r2,0x03						      #Current Status / 8 (rather than setting back to 0 each loop)
@@ -30,46 +30,46 @@
                                                  ori r3,r0,0x0080					      #r3 = 0x80
                                                  srav r3,r3,r2						      #0x80 >> Current Status (which  status to enable)
                                                  andi r2,r5,0x0001					      #
-                                                 beq r2,r0, @ISCD.Not_KO			      #Branch if KO Flag isn't enabled
+                                                 beq r2,r0, @ISCD.Not_KO                                      #Branch if KO Flag isn't enabled
                                                  andi r2,r5,0x0002					      #
                                                  lui r1,0x8006						      #
                                                  addu r1,r1,r4						      #
                                                  lbu r2,0x62d0(r1)					      #Load KO Status Checks
-                                                 nop								      #
+                                                 nop                                                          #
                                                  or r2,r3,r2						      #Enable Current Status
                                                  lui r1,0x8006						      #
                                                  addu r1,r1,r4						      #
                                                  sb r2,0x62d0(r1)					      #Store new KO Status Checks
                                                  andi r2,r5,0x0002					      #
-@ISCD.Not_KO:                                    beq r2,r0, @ISCD.x02_not_enabled	      #Branch if 0x02 isn't enabled (byte  0x04)
+@ISCD.Not_KO:                                    beq r2,r0, @ISCD.x02_not_enabled                             #Branch if 0x02 isn't enabled (byte  0x04)
                                                  andi r2,r5,0x0004					      #
                                                  lui r1,0x8006						      #
                                                  addu r1,r1,r4						      #
                                                  lbu r2,0x62d5(r1)					      #Load 0x02 Status Checks
-                                                 nop                                      #
-                                                 or r2,r3,r2					          #Enable Current Status
+                                                 nop                                                          #
+                                                 or r2,r3,r2                                                  #Enable Current Status
                                                  lui r1,0x8006						      #
                                                  addu r1,r1,r4						      #
-                                                 sb r2,0x62d5(r1)				          #Store new 0x02 Status Checks
-                                                 andi r2,r5,0x0004                        #
-@ISCD.x02_not_enabled:                           beq r2,r0, @ISCD.x04_not_enabled	      #Branch if 0x04 isn't enabled (byte 0x04)
-                                                 andi r2,r5,0x0080                        #
-                                                 lui r1,0x8006                            #
-                                                 addu r1,r1,r4                            #
+                                                 sb r2,0x62d5(r1)                                             #Store new 0x02 Status Checks
+                                                 andi r2,r5,0x0004                                            #
+@ISCD.x02_not_enabled:                           beq r2,r0, @ISCD.x04_not_enabled                             #Branch if 0x04 isn't enabled (byte 0x04)
+                                                 andi r2,r5,0x0080                                            #
+                                                 lui r1,0x8006                                                #
+                                                 addu r1,r1,r4                                                #
                                                  lbu r2,0x62da(r1)					      #Load 0x04 Status Checks
-                                                 nop                                      #
-                                                 or r2,r3,r2					          #Enable Current Status
-                                                 lui r1,0x8006                            #
-                                                 addu r1,r1,r4                            #
+                                                 nop                                                          #
+                                                 or r2,r3,r2                                                  #Enable Current Status
+                                                 lui r1,0x8006                                                #
+                                                 addu r1,r1,r4                                                #
                                                  sb r2,0x62da(r1)					      #Store new 0x04 Status Checks
-                                                 andi r2,r5,0x0080                        #
-@ISCD.x04_not_enabled:                           beq r2,r0, @ISCD.Freeze_CT_skip	      #Branch if Freeze CT isn't enabled (byte  0x04)
-                                                 andi r2,r6,0x0080                        #
-                                                 lui r1,0x8006                            #
-                                                 addu r1,r1,r4                            #
+                                                 andi r2,r5,0x0080                                            #
+@ISCD.x04_not_enabled:                           beq r2,r0, @ISCD.Freeze_CT_skip                              #Branch if Freeze CT isn't enabled (byte  0x04)
+                                                 andi r2,r6,0x0080                                            #
+                                                 lui r1,0x8006                                                #
+                                                 addu r1,r1,r4                                                #
                                                  lbu r2,0x62df(r1)					      #Load 0x80 Status Checks
-                                                 nop                                      #
-                                                 or r2,r3,r2					          #Enable Current Status
+                                                 nop                                                          #
+                                                 or r2,r3,r2                                                  #Enable Current Status
                                                  lui r1,0x8006						      #
                                                  addu r1,r1,r4                            #
                                                  sb r2,0x62df(r1)				          #Store new 0x80 Status Checks
