@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="utf-8" ?>
+
+<Patches>
+  <Patch name="SCUS 942.21 Repointer">
+        <Description>Repoints SCUS_942_21 return locations (routine locations: 0x80059854 - 0x8005dc14)</Description> 
+		<Location file="SCUS_942_21" offset="59854" mode="ASM" offsetMode="RAM" inputFile="XmlPatches\Files\SCUS_942_21_59854 .asm" />
+        <Location specific="SCUS_942_21:42734" mode="ASM" offsetMode="RAM">
+										jal @Initialize_Status_Check_Data
+        </Location>
+		
+        <Location specific="SCUS_942_21:42994,42ac4" mode="ASM" offsetMode="RAM">
+										jal @Clear_Party
+        </Location>
+		
+        <Location specific="SCUS_942_21:5dd70,5e2d8,BATTLE_BIN:12fdb8,1301b8,1340cc,14b3d0,180c3c,WORLD_WLDCORE_BIN:68264,69e40,WORLD_WORLD_BIN:e4294,e4694,e4fd8,e8744,fe854,10894c,1090d4,109254,10ca5c,10cac4,115368,120a08,120a94,12113c,1212fc,125a88,125be4,125ca0,EVENT_EQUIP_OUT:1c67b8,1c6f04,EVENT_ATTACK_OUT:1c30f8,1c81e8,1c86a0,1c9514,EVENT_REQUIRE_OUT:1c4770,1c5544,1c5dd8,1c6030,1c60f4,1c66b0,EVENT_CARD_OUT:1c01e4" mode="ASM" offsetMode="RAM">
+										jal @Get_Party_Data_Pointer
+		</Location>
+		
+		<Location specific="SCUS_942_21:429a8" mode="ASM" offsetMode="RAM">
+										jal @Unit_Initialization
+		</Location>
+		
+		<Location specific="BATTLE_BIN:1341f8,WORLD_WORLD_BIN:e8870,EVENT_REQUIRE_OUT:1c48d0,1c49f8,1c7014" mode="ASM" offsetMode="RAM">
+										jal @Add_Unit_to_Party_Data
+		</Location>
+		
+		<Location specific="EVENT_REQUIRE_OUT:1c6078" mode="ASM" offsetMode="RAM">
+										jal @Find_Free_Party_Slot
+		</Location>
+  
+        <Location specific="WORLD_WORLD_BIN:125c88" mode="ASM" offsetMode="RAM">
+										jal @Create_Monster_Egg
+		</Location>
+
+        <Location specific="SCUS_942_21:42ad4,WORLD_WORLD_BIN:1209f0" mode="ASM" offsetMode="RAM">
+										jal @Find_Empty_Party_Slot_Generate_Unit
+		</Location>
+		
+		<Location specific="BATTLE_BIN:13415c,WORLD_WORLD_BIN:e87d4,1209a0,1384f8,1387a8,138a14,EVENT_ATTACK_OUT:1c36d8,EVENT_REQUIRE_OUT:1c4850,1c48b4,1c4e4c,1c6834" mode="ASM" offsetMode="RAM">
+										jal @Remove_Unit_from_Party		
+		</Location>
+		
+        <Location specific="BATTLE_BIN:1807bc,181994,182378,18e828" mode="ASM" offsetMode="RAM">
+										jal @Load_Ability_From_Skillset
+		</Location>
+		
+		 <Location specific="BATTLE_BIN:133a0c,1975d8,19a678,19bc68,WORLD_WLDCORE_BIN:875b0,WORLD_WORLD_BIN:e8084,120e2c,1229a8,125624,EVENT_JOBSTTS_OUT:1e044c,EVENT_ATTACK_OUT:1c5f94,EVENT_REQUIRE_OUT:1c2b40,1c5c84,EVENT_BUNIT_OUT:1c6b44,1c74d4" mode="ASM" offsetMode="RAM">
+										jal @Store_Skillset_Abilities
+		 </Location>
+		
+		<Location specific="BATTLE_BIN:13624c,14178c,WORLD_WORLD_BIN:ea0cc,f5004,11f3c0,EVENT_JOBSTTS_OUT:1df9e4,EVENT_BUNIT_OUT:1cccac" mode="ASM" offsetMode="RAM">
+										jal @Calculate_Ability_Pointers_and_Type
+		</Location>
+		
+		<Location specific="BATTLE_BIN:82640,8377c,133b9c,136b20,142294,1422ac,1422f8,WORLD_WORLD_BIN:e8214,ea9a0,f5b0c,f5b24,f5b70,1024e0,EVENT_ATTACK_OUT:1c6068,EVENT_REQUIRE_OUT:1c2cd0,1c5d58,1c5ea4,1c5f6c,1c72ac,EVENT_OPTION_OUT:1c10a4" mode="ASM" offsetMode="RAM">
+										jal @Get_Item_Data_Pointer		
+		</Location>
+		
+		<Location specific="WORLD_WORLD_BIN:e5058,109154,1092d4,10cb44,1223fc,122774,EVENT_ATTACK_OUT:1c8268,1c8720,EVENT_REQUIRE_OUT:1c55c4,EVENT_JOBSTTS_OUT:1e032c,1e0374,EVENT_BUNIT_OUT:1c71ec,1c7428" mode="ASM" offsetMode="RAM">
+										jal @Get_Job_Data_Pointer		
+		</Location>
+		
+		<Location specific="BATTLE_BIN:17f354,17f460,WORLD_WLDCORE_BIN:87278,WORLD_WORLD_BIN:1151dc,12112c,121510,1382e0,EVENT_ATTACK_OUT:1c5c08,EVENT_REQUIRE_OUT:1c58f8" mode="ASM" offsetMode="RAM">
+										jal @Initialize_Unit_Job_Data		
+		</Location>
+		
+		<Location specific="BATTLE_BIN:17f9a0,18c7d8" mode="ASM" offsetMode="RAM">
+										jal @Unit_Battle_Initialization
+		</Location>
+
+		<Location specific="SCUS_942_21:59818" mode="DATA" offsetMode="RAM" replaceLabels="true">
+		                                @CAS.store_new_hp
+		                                @CAS.store_new_mp
+		                                @CAS.store_new_sp
+		                                @CAS.store_new_pa
+		                                @CAS.store_new_ma
+		</Location>
+		
+        <Location specific="BATTLE_BIN:17f8f4" mode="ASM" offsetMode="RAM">
+										jal @Calculate_Hightest_Party_Level
+		</Location>
+		
+        <Location specific="SCUS_942_21:5e000" mode="ASM" offsetMode="RAM">
+										jal @Status_Initialization
+		</Location>
+		
+        <Location specific="WORLD_WORLD_BIN:115360" mode="ASM" offsetMode="RAM">
+										jal @Set_Status_RSM_WORLD
+		</Location>
+		
+        <Location specific="BATTLE_BIN:18d4cc,EVENT_EQUIP_OUT:1bf9f4,1c6f1c" mode="ASM" offsetMode="RAM">
+										jal @Set_Status_RSM_BATTLE
+		</Location>
+		
+        <Location specific="BATTLE_BIN:17e8c4,18eba0" mode="ASM" offsetMode="RAM">
+										jal @Level_Up_Check
+		</Location>	
+        
+		<Location specific="WORLD_WORLD_BIN:125cc8" mode="ASM" offsetMode="RAM">
+										jal @Level_to_Specific_Level
+		</Location>			
+		
+		<Location specific="BATTLE_BIN:18c904" mode="ASM" offsetMode="RAM">
+										jal @Level_Up_Section
+		</Location>			
+
+		<Location specific="BATTLE_BIN:18e2c0,18e46c,18ece0" mode="ASM" offsetMode="RAM">
+										jal @Actual_Status_CT_Setting
+		</Location>			
+
+		<Location specific="SCUS_942_21:5dea4,BATTLE_BIN:17ebe8,WORLD_WORLD_BIN:120fa8,12254c,EVENT_BUNIT_OUT:1c6d38,1c7290,EVENT_JOBSTTS_OUT:1e0068" mode="ASM" offsetMode="RAM">
+										jal @Calculate_Unlocked_Jobs
+		</Location>        
+		
+  </Patch>
+</Patches>  
